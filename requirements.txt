@@ -1,0 +1,8 @@
+# Archivo: requirements.txt actuales 
+streamlit
+numpy (X)
+matplotlib
+plotly
+scipy (X)
+pydantic
+pytest
