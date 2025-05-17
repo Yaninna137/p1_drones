@@ -20,14 +20,15 @@ Para poder cumplir nuestra misión crearemos una apicación avanzada en estructu
 
 ### Herramientas actualizar(por ahora)
 -**Backend**: Python 3
--**Librerias**: 
-    - **streamlit**: Intefaz a utilizar por su web rápida y elegante.
-    - **matplotlib**: Poder implemetar gráficos 2D.
-    - **plotly**:Poder implementar gráficos 3D interactivos.
-    - **pydantic**: Usar para validación robusta de datos (como entradas de RUT, parámetros, etc.)
-    - **pytest**: Realizar testeo automático de tus funciones
-    - **numpy**: Cálcular numéricos y vectores.
-    - **scipy**: Cálculos de colisión y precisión m.
+
+**Librerias** 
+- **streamlit**: Intefaz a utilizar por su web rápida y elegante.
+- **matplotlib**: Poder implemetar gráficos 2D.
+- **plotly**:Poder implementar gráficos 3D interactivos.
+- **pydantic**: Usar para validación robusta de datos (como entradas de RUT, parámetros, etc.)
+- **pytest**: Realizar testeo automático de tus funciones
+- **numpy**: Cálcular numéricos y vectores.
+- **scipy**: Cálculos de colisión y precisión m.
 <svg width="300" height="200">
   <defs>
     <path id="curva" d="M 50,100 A 100,100 0 0,1 250,100" />
