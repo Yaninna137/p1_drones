@@ -10,7 +10,7 @@ st.set_page_config(page_title="Simulador de entorno drones-RUT", layout="centere
 st.title("🌀 Generador de Elipses desde tu RUT")
 
 rut = st.text_input("Ingresa tu RUT (sin puntos ni guión):")
-# estilo_add()  # Aplicar estilo CSS personalizado
+estilo_add()  # Aplicar estilo CSS personalizado
 
 def Contenedor_Datos(elipse, rut):
     try:

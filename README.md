@@ -1,50 +1,76 @@
-# Sistema de monitoreo de drones
+# Sistema de Monitoreo de Drones
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 
 <div align="center">
   <img src="assets/dron.avif" alt="Logo de un dron" width="200"/>
   <br/>
-  <i>Simular trayectoria de un dron a travez del rut ingresado</i>
+  <i>Simula la trayectoria de un dron a través del RUT ingresado</i>
 </div>
 
 ## 📝 Contexto del proyecto 
-En las instalaciones de la Universidad Católica de Temuco, se analizan trayectorias seguras para drones en entornos urbanos, como eventos masivos o inspecciones de estructuras civiles. 
+En la Universidad Católica de Temuco, se investigan trayectorias seguras para drones en entornos urbanos como eventos masivos o inspecciones de estructuras civiles.
 
-Estas trayectorias se modelan mediante secciones cónicas (elipses), vinculadas al RUT de los operadores, con el objetivo de garantizar seguridad y eficiencia en misiones autónomas.
+Estas trayectorias se modelan mediante secciones cónicas (elipses), asociadas al RUT del operador, con el fin de garantizar seguridad y eficiencia en misiones autónomas.
 
-Los estudiantes de ingeniería civil informática serán responsables de diseñar, simular y validar estas trayectorias aplicando conceptos de geometría analítica, programación y modelado matem´atico. El enfoque
-se divide en varias fases para integrar teoría práctica.
+El proyecto está a cargo de estudiantes de Ingeniería Civil Informática, quienes deben diseñar, simular y validar dichas trayectorias, aplicando geometría analítica, programación y modelado matemático. El desarrollo se organiza por fases, integrando teoría y práctica.
 
-## 🔧 Trabajo a implementar
-Para poder cumplir nuestra misión crearemos una apicación avanzada en estructura para entregar una interfaz amigable y funcional a nuestro usuarios y poder validar datos
+## 👷 ¿Qué tiene ahora? (Avance)
 
-### Herramientas actualizar(por ahora)
--**Backend**: Python 3
+Actualmente se ha desarrollado la funcionalidad de cálculo de una elipse a partir de un RUT en `app/core/elipse.py`.
 
-**Librerias** 
-- **streamlit**: Intefaz a utilizar por su web rápida y elegante.
-- **matplotlib**: Poder implemetar gráficos 2D.
-- **plotly**:Poder implementar gráficos 3D interactivos.
-- **pydantic**: Usar para validación robusta de datos (como entradas de RUT, parámetros, etc.)
-- **pytest**: Realizar testeo automático de tus funciones
-- **numpy**: Cálcular numéricos y vectores.
-- **scipy**: Cálculos de colisión y precisión m.
-<svg width="300" height="200">
-  <defs>
-    <path id="curva" d="M 50,100 A 100,100 0 0,1 250,100" />
-  </defs>
-  <text font-size="20" fill="black">
-    <textPath href="#curva">"Se usara primero la liberia numpy y scipy, pero luego se sacara para implementar los calculos sin depender de estas libreria(Demostrar manualmente su calculo)"</textPath>
-  </text>
-</svg>
+Se implementa programación orientada a objetos (POO), separando la lógica de operaciones de la visualización.
 
-
-## 👨‍💻 Desarrollo
-
-Proyecto desarrollado para MAT1186 - Introducción al cálculo, implementando operaciones de elemento canonico sin depender de bibliotecas matemáticas externas, reforzando la comprensión de los conceptos matemáticos subyacentes.
+En esta versión 1.0, la aplicación permite:
+- Ingresar un RUT y generar una elipse asociada.
+- Mostrar los elementos derivados de esa elipse.
+- Realizar todos los cálculos manualmente (sin utilizar librerías como `math`).  
+  → Ver más en [`docs/elipse.md`](docs/elipse.md)
 
 ---
 
 <div align="center">
-  <p>version 1.0 </p>
+  <img src="assets/Insertar.png" alt="Ingresar RUT" />
+  <br/>
+  <i>Ingreso de RUT (solo uno por ahora)</i>
+</div>
+
+<div align="center">
+  <img src="assets/Datos.png" alt="Elementos de la elipse" />
+  <br/>
+  <i>Elementos que se generan y se muestran</i>
+</div>
+
+<div align="center">
+  <img src="assets/Datos.png" alt="Diseño del contenedor"/>
+  <br/>
+  <i>Contenedor con diseño CSS (sujeto a cambios)</i>
+</div>
+
+## 🔧 Trabajo a implementar
+
+Se proyecta desarrollar una aplicación con estructura avanzada, que ofrezca una interfaz amigable y funcional para los usuarios, permitiendo validar los datos de forma clara y segura.
+
+## 🧰 Herramientas utilizadas (por ahora)
+
+**Backend:** Python 3.8+
+
+**Librerías:**
+- **Streamlit**: Interfaz web rápida y elegante.
+- **Matplotlib**: Gráficos 2D.
+- **Plotly**: Gráficos 3D interactivos.
+- **Pydantic**: Validación robusta de datos (como entradas de RUT, parámetros, etc.).
+- **Pytest**: Pruebas automáticas de funciones.
+- **Numpy**: Cálculos numéricos y manejo de vectores.
+- **Scipy**: Cálculos de colisión y precisión matemática.
+
+> **Nota:** Inicialmente se utilizarán Numpy y Scipy para facilitar validaciones, pero en etapas posteriores se eliminarán para implementar los cálculos manualmente y reforzar la comprensión matemática.
+
+## 👨‍💻 MAT1186
+
+Proyecto desarrollado para la asignatura **MAT1186 - Introducción al Cálculo**, implementando operaciones de elementos canónicos sin depender de bibliotecas matemáticas externas, con el objetivo de reforzar los conceptos teóricos mediante su aplicación práctica.
+
+---
+
+<div align="center">
+  <p><strong>Versión 1.0</strong> - Primer prototipo funcional</p>
 </div>
