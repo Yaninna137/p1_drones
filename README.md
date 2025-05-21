@@ -25,26 +25,42 @@ En esta versión 1.0, la aplicación permite:
 - Mostrar los elementos derivados de esa elipse.
 - Realizar todos los cálculos manualmente (sin utilizar librerías como `math`).  
   → Ver más en [`docs/elipse.md`](docs/elipse.md)
-- Mostrar grafica 2D con los puntos
+- Mostrar gráfica 2D con los puntos.
+- Mostrar gráfica 2D y3D de más elipse.
+- Detectar Colisiones entre elipse.
+- Mejorar visualización.
+- Ingresar más rut (máximo de soporte 5).
+- Rut aleatorio.
+- Separación, organización de archivos y nuevos archivos `test`, `core`.
 
-> **Nota:** Hemos hecho una última actualización , la cual mejoramos interfaz e implementamos gráfica 2D.
----
+
+> **Nota:** Hemos hecho una última actualización versión 2.0 : (Implementación de gráfica 3D, ingresar más rut, detección de colisión, mejora y más elementos de interfaz).
+
+> **Rut Aleatorio** Corregir un error el 40% entregara un rut invalido en aleatorio, hay que corregir.
+
+> **Panel** Se debe cambiar el panel de descripción.
 
 <div align="center">
-  <img src="assets/Insertar.png" alt="Ingresar RUT" />
+  <img src="assets/campo2.png" alt="Ingresar RUT" />
   <br/>
-  <i>Ingreso de RUT (solo uno por ahora)</i>
+  <i>Ingreso de RUT (De 1 a 5 max)</i>
 </div>
 <div align="center">
-  <img src="assets/2D.png" alt="Diseño del contenedor"/>
+  <img src="assets/pest1.png" alt="Diseño del contenedor"/>
   <br/>
-  <i>Implementación de grafica 2D</i>
+  <i>Pestañas disponibles</i>
 </div>
 
 <div align="center">
-  <img src="assets/grafica2D.png" alt="Diseño del contenedor"/>
+  <img src="assets/pesta1.png" alt="Diseño del contenedor"/>
   <br/>
-  <i>Este es nuestro diseño actual </i>
+  <i>Pestaña 1: Datos de elipses</i>
+</div>
+<div align="center">
+  <img src="assets/past21.png" alt="2D y 3D multiple elipses"/>
+  <img src="assets/past22.png" alt="colisiones"/>
+  <br/>
+  <i>Pestaña 2: Gráficos y colisiones</i>
 </div>
 
 ## 🔧 Trabajo a implementar

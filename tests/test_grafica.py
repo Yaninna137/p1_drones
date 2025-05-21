@@ -1,0 +1,3 @@
+'''
+importar grafica
+'''

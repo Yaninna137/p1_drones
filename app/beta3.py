@@ -162,4 +162,3 @@ if rut:
         st.warning(str(ve))
     except Exception as e:
         st.error(f"Error: {e}")
-
