@@ -63,6 +63,7 @@ En esta versión 1.0, la aplicación permite:
   <i>Pestaña 2: Gráficos y colisiones</i>
 </div>
 
+**Archivo correspondiente**La actual interfaz es perteneciente a la `beta5_interfaz.py` dentro del archivo `app/`. Esta interfaz aunque está algo desordenada en su sintaxis (cosa que se arreglara en prox. versiones)esta conectada con los archivos de `core/`donde se encuentran las lógicas de operar los datos .
 ## 🔧 Trabajo a implementar
 
 Se proyecta desarrollar una aplicación con estructura avanzada, que ofrezca una interfaz amigable y funcional para los usuarios, permitiendo validar los datos de forma clara y segura.
