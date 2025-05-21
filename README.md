@@ -25,7 +25,9 @@ En esta versión 1.0, la aplicación permite:
 - Mostrar los elementos derivados de esa elipse.
 - Realizar todos los cálculos manualmente (sin utilizar librerías como `math`).  
   → Ver más en [`docs/elipse.md`](docs/elipse.md)
+- Mostrar grafica 2D con los puntos
 
+> **Nota:** Hemos hecho una última actualización , la cual mejoramos interfaz e implementamos gráfica 2D.
 ---
 
 <div align="center">
@@ -33,17 +35,16 @@ En esta versión 1.0, la aplicación permite:
   <br/>
   <i>Ingreso de RUT (solo uno por ahora)</i>
 </div>
-
 <div align="center">
-  <img src="assets/Datos.png" alt="Elementos de la elipse" />
+  <img src="assets/2D.png" alt="Diseño del contenedor"/>
   <br/>
-  <i>Elementos que se generan y se muestran</i>
+  <i>Implementación de grafica 2D</i>
 </div>
 
 <div align="center">
-  <img src="assets/Datos.png" alt="Diseño del contenedor"/>
+  <img src="assets/grafica2D.png" alt="Diseño del contenedor"/>
   <br/>
-  <i>Contenedor con diseño CSS (sujeto a cambios)</i>
+  <i>Este es nuestro diseño actual </i>
 </div>
 
 ## 🔧 Trabajo a implementar
@@ -72,5 +73,5 @@ Proyecto desarrollado para la asignatura **MAT1186 - Introducción al Cálculo**
 ---
 
 <div align="center">
-  <p><strong>Versión 1.0</strong> - Primer prototipo funcional</p>
+  <p><strong>Versión 1.1</strong> - Primer prototipo funcional</p>
 </div>

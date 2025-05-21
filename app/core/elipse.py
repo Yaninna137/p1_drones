@@ -107,7 +107,32 @@ class Elipse:
             term = (x**(2 * n)) / self.factorial(2 * n)
             result += sign * term
         return result
+    def puntos_con_etiquetas(self):
+        """
+        Devuelve una lista de tuplas (x, y, etiqueta) con los puntos característicos de la elipse.
+        """
+        elementos = self.Elementos()
+        puntos = []
 
+        if elementos == 0:
+            return puntos  # En caso de error de parámetros
+
+        # Focos
+        puntos.append((*elementos["focos"][0], "F"))
+        puntos.append((*elementos["focos"][1], "F'"))
+
+        # Vértices principales
+        puntos.append((*elementos["vertices_principales"][0], "V"))
+        puntos.append((*elementos["vertices_principales"][1], "V'"))
+
+        # Vértices secundarios
+        puntos.append((*elementos["vertices_secundarios"][0], "B"))
+        puntos.append((*elementos["vertices_secundarios"][1], "B'"))
+
+        # Centro
+        puntos.append((self.h, self.k, "C"))
+
+        return puntos
 
 def generar_elipse_desde_rut(rut: str, grupo_impar=True) -> Elipse:
     digitos = [int(c) for c in rut if c.isdigit()]
