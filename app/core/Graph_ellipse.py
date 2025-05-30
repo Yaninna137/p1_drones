@@ -1,5 +1,4 @@
 # app/core/Graph_ellipse.py
-# from Math_ellipse import Elipse
 from .Math_ellipse import Elipse
 from .Items_ellipse import ElipseVisual
 import matplotlib.pyplot as plt
@@ -7,62 +6,100 @@ import plotly.graph_objects as go
 import io
 import base64
 
-def Grafico_2D(elipse: Elipse, escala=0.5):
-    puntos_elipse = elipse.calcular_puntos(n=200)
+tick_color = ['#BBBBBB', '#888888', '#999999', '#AAAAAA'] 
+colores = [
+    "#4DD0E1",  # Azul cian suave
+    "#9575CD",  # Violeta suave
+    "#F06292",  # Rosa sandía
+    "#FFB74D",  # Naranja suave
+    "#81C784",  # Verde menta
+    "#BA68C8",  # Violeta medio
+    "#2A2A2A"   # Blanco (para último punto si se desea)
+]
 
-    # Asegurando de usar puntos con etiquetas desde ElipseVisual
-    if isinstance(elipse, ElipseVisual):
+def formatear_numero(n):
+    return int(n) if n == int(n) else round(n, 1)
+
+# GRAFICO 2D - INDIVIDUAL ELIPSE =>
+
+def grafico_2d_simple(elipse: Elipse, escala=1.0):
+    puntos = elipse.calcular_puntos(n=200)
+    
+    if isinstance(elipse, ElipseVisual): # Asegurando de usar puntos con etiquetas desde ElipseVisual
         puntos_etiquetados = elipse.puntos_con_etiquetas()
     else:
         elipse_ext = ElipseVisual(**elipse.__dict__)
         puntos_etiquetados = elipse_ext.puntos_con_etiquetas()
 
-    fig, ax = plt.subplots(figsize=(6, 6))
-    x_vals = [p[0] * escala for p in puntos_elipse]
-    y_vals = [p[1] * escala for p in puntos_elipse]
+    x_vals = [x * escala for x, _ in puntos]
+    y_vals = [y * escala for _, y in puntos]
 
-    # Fondo y estilo visual elegante
+    fig, ax = plt.subplots(figsize=(6, 6))
     fig.patch.set_facecolor('#121212')
     ax.set_facecolor('#121212')
-    ax.plot(x_vals, y_vals, color='#00ff00', linewidth=3, alpha=0.9, linestyle='-', zorder=2)
+    ax.plot(x_vals, y_vals, color="#0080FF66", linewidth=1, label="Elipse")
 
-    for x, y, label in puntos_etiquetados:
+    # Centro
+    ax.scatter(elipse.h * escala, elipse.k * escala, color='red', zorder=5)
+    ax.text(elipse.h * escala + 0.2, elipse.k * escala + 0.2, f"({elipse.h}, {elipse.k})", color='red')
+
+    # Ejes cartesianos
+    ax.axhline(0, color='gray', linewidth=1)
+    ax.axvline(0, color='gray', linewidth=1)
+
+    # Limites
+    margen = max(elipse.a, elipse.b) * 1.5 * escala
+    ax.set_xlim((elipse.h - margen) * escala, (elipse.h + margen) * escala)
+    ax.set_ylim((elipse.k - margen) * escala, (elipse.k + margen) * escala)
+
+    # Diseño para la Grafica
+    info_labels = []
+    for i, (x, y, label) in enumerate(puntos_etiquetados):
         x_scaled, y_scaled = x * escala, y * escala
-        etiqueta = f"{label} ({x:.1f}, {y:.1f})"
-        ax.plot(x_scaled, y_scaled, 'o', color='#80ff72', markersize=8, markeredgecolor='white', markeredgewidth=0.8, zorder=3)
-        ax.text(x_scaled + 0.12, y_scaled + 0.12, etiqueta, color='#a5d6a7', fontsize=11, fontweight='semibold', zorder=4)
+        ax.plot(x_scaled, y_scaled, 'o', color=colores[i], markersize=8,
+                markeredgecolor=colores[i], markeredgewidth=0.8, zorder=3)
+        
+        texto = f"{label} ({formatear_numero(x)}, {formatear_numero(y)})"
+        info_labels.append((texto, colores[i]))
 
-    ax.set_xticks([])
-    ax.set_yticks([])
-    for spine in ax.spines.values():
-        spine.set_visible(False)
-    ax.spines['bottom'].set_visible(True)
-    ax.spines['left'].set_visible(True)
-    ax.spines['bottom'].set_color('#121212')
-    ax.spines['left'].set_color('#4caf50')
-    ax.spines['bottom'].set_linewidth(1.5)
-    ax.spines['left'].set_linewidth(1.5)
-    ax.grid(True, color='#4caf50', alpha=0.15, linestyle='--', linewidth=0.8)
-    ax.set_aspect('equal')
+    # Personalizar leyenda 
+    x_rel = 0.02
+    y_rel_base = 0.02
+    espaciado = 0.05  
+    for idx, (texto, color) in enumerate(info_labels[:-1]):
+        y_rel = y_rel_base + idx * espaciado
+        ax.text(x_rel, y_rel, f"● {texto}",
+                transform=ax.transAxes,
+                fontsize=11, fontweight='bold',
+                verticalalignment='bottom',
+                color=color)
+        
+    ax.set_aspect('equal')  # CRUCIAL para que no se deforme la elipse
+    ax.grid(True, linestyle='-', alpha=0.5, color='#3A3A3A')  # Color de linias graficas
+    ax.set_title("Elipse centrada en ({}, {})".format(elipse.h, elipse.k),color="#FF4C4C", fontsize=14, fontweight='bold')
 
-    # Conversión a base64
+    ax.set_xlabel("Eje X")
+    ax.set_ylabel("Eje Y")
+
+    ax.tick_params(axis='x', colors=tick_color[0]) # Color de los números de los ejes X
+    ax.tick_params(axis='y', colors=tick_color[0]) # Color de los números de los ejes Y
+    ax.xaxis.label.set_color(tick_color[0]) # Color de las etiquetas de los ejes
+    ax.yaxis.label.set_color(tick_color[0]) # Color del título (opcional, para consistencia)
+
+
+    # Guardar como imagen base64
     buf = io.BytesIO()
-    fig.savefig(buf, format="png", bbox_inches='tight', dpi=100, facecolor=fig.get_facecolor())
+    fig.savefig(buf, format="png", bbox_inches='tight')
     buf.seek(0)
     img_base64 = base64.b64encode(buf.read()).decode()
     buf.close()
+
     return img_base64
 
-def Grafico_2D_multiple(elipses: list,ruts_limpios, escala=0.5):
-    import matplotlib.pyplot as plt
-    import io
-    import base64
+# GRAFICO 2D INTERACTIVO - MULTIPLE ELIPSE =>
 
-    colores = ['#00ff00', '#ff4081', '#40c4ff', '#ffd740', '#b388ff']
-    
-    fig, ax = plt.subplots(figsize=(7, 7))
-    fig.patch.set_facecolor('#121212')
-    ax.set_facecolor('#121212')
+def grafico_2d_interactivo(elipses: list, ruts_limpios: list, escala=1.0):
+    fig = go.Figure()
 
     for idx, elipse in enumerate(elipses):
         puntos = elipse.calcular_puntos(n=200)
@@ -70,48 +107,71 @@ def Grafico_2D_multiple(elipses: list,ruts_limpios, escala=0.5):
         y_vals = [y * escala for _, y in puntos]
         color = colores[idx % len(colores)]
 
-        ax.plot(
-            x_vals, y_vals,
-            label=f"Elipse {ruts_limpios[idx]}",
-            color=color,
-            linewidth=2.5,
-            alpha=0.85,
-            zorder=2
-        )
+        fig.add_trace(go.Scatter(
+            x=x_vals,
+            y=y_vals,
+            mode='lines',
+            name=f"Elipse {ruts_limpios[idx]}",
+            line=dict(color=color, width=2.5),
+            hoverinfo='name'
+        ))
 
-    # Estilo general
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_aspect("equal")
-    ax.grid(True, color='#4caf50', alpha=0.15, linestyle='--', linewidth=0.8)
-    for spine in ax.spines.values():
-        spine.set_visible(False)
-    ax.spines['bottom'].set_visible(True)
-    ax.spines['left'].set_visible(True)
-    ax.spines['bottom'].set_color('#121212')
-    ax.spines['left'].set_color('#4caf50')
-    ax.spines['bottom'].set_linewidth(1.5)
-    ax.spines['left'].set_linewidth(1.5)
+        # Punto central (opcional)
+        fig.add_trace(go.Scatter(
+            x=[elipse.h * escala],
+            y=[elipse.k * escala],
+            mode='markers+text',
+            text=[f"({elipse.h}, {elipse.k})"],
+            textposition="top right",
+            marker=dict(color=color, size=6),
+            showlegend=False
+        ))
 
-    ax.legend(loc='upper right', fontsize=11, facecolor='#121212', edgecolor='#4caf50', framealpha=0.8)
+    fig.update_layout(
+        # title="Visualización 2D de trayectorias",
+        plot_bgcolor='#121212',
+        paper_bgcolor='#121212',
+        font=dict(color=tick_color[0], size=12),
+        xaxis=dict(
+            title="Eje X",
+            color=tick_color[0],
+            zeroline=True,
+            showgrid=True,
+            gridcolor="#2A2A2A",
+        ),
+        yaxis=dict(
+            title="Eje Y",
+            color=tick_color[0],
+            zeroline=True,
+            showgrid=True,
+            gridcolor="#2A2A2A",
+            scaleanchor="x",  # Relación 1:1
+            scaleratio=1
+        ),
+        legend=dict(
+            bgcolor='#121212',
+            bordercolor=tick_color[3],
+            borderwidth=1
+        ),title="Visualización 2D de trayectorias"
+    )
 
-    # Conversión a imagen base64
-    buf = io.BytesIO()
-    fig.savefig(buf, format="png", bbox_inches='tight', dpi=100, facecolor=fig.get_facecolor())
-    buf.seek(0)
-    img_base64 = base64.b64encode(buf.read()).decode()
-    buf.close()
-    return img_base64
+    return fig
+
+# GRAFICO 3D INTERACTIVO - MULTIPLE ELIPSE =>
 
 def Grafico_3D_multiple(elipses: list, ruts_limpios: list, escala=0.5):
     fig = go.Figure()
-    colores = ['#00ff00', '#ff4081', '#40c4ff', '#ffd740', '#b388ff']
+
+    colores = [
+        "#4DD0E1", "#FFD54F", "#81C784",
+        "#BA68C8", "#FF8A65", "#64B5F6", "#F06292"
+    ]
 
     for idx, elipse in enumerate(elipses):
         puntos = elipse.calcular_puntos(n=100)
         x = [p[0] * escala for p in puntos]
         y = [p[1] * escala for p in puntos]
-        z = [idx] * len(puntos)  # Cada elipse en una "altura" distinta
+        z = [idx] * len(puntos)
 
         fig.add_trace(go.Scatter3d(
             x=x,
@@ -128,9 +188,9 @@ def Grafico_3D_multiple(elipses: list, ruts_limpios: list, escala=0.5):
         plot_bgcolor='#121212',
         font_color='white',
         scene=dict(
-            xaxis=dict(title='X', backgroundcolor='#121212', gridcolor='#4caf50'),
-            yaxis=dict(title='Y', backgroundcolor='#121212', gridcolor='#4caf50'),
-            zaxis=dict(title='Z', backgroundcolor='#121212', gridcolor='#4caf50')
+            xaxis=dict(title='X', backgroundcolor='#121212', gridcolor='#424242'),
+            yaxis=dict(title='Y', backgroundcolor='#121212', gridcolor='#424242'),
+            zaxis=dict(title='Z', backgroundcolor='#121212', gridcolor='#424242')
         ),
         title="Visualización 3D de trayectorias"
     )

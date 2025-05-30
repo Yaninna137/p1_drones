@@ -34,31 +34,32 @@ class Elipse:
             return f"\\frac{{(x - {self.h})^2}}{{{self.b ** 2}}} + \\frac{{(y - {self.k})^2}}{{{self.a ** 2}}} = 1"  # Formato latex
 
     def ecuacion_general(self):
-        A = 1 / (self.a ** 2) if self.orientacion == "horizontal" else 1 / (self.b ** 2)
-        B = 1 / (self.b ** 2) if self.orientacion == "horizontal" else 1 / (self.a ** 2)
-        D = -2 * self.h * A
-        E = -2 * self.k * B
-        F = A * self.h**2 + B * self.k**2 - 1
+        a2 = self.a ** 2
+        b2 = self.b ** 2
+        h_exp2 = self.h ** 2 # Calculo de h^2  del binomio cuadrado (x - h)^2 
+        k_exp2 = self.k ** 2 # Calculo de k^2  => del binomio cuadrado (y - k)^2 
 
-        def formato_numero(valor):
-            # Si es entero, devuelve sin decimales
-            if valor == int(valor):
-                return str(int(valor))
-            else:
-                # Si es decimal, devuelve con 4 decimales
-                return f"{valor:.4f}"
+        if self.orientacion == "horizontal":
+            A = b2
+            C = a2
+        else:
+            A = a2
+            C = b2
 
-        def signo_valor(valor):
-            signo = "+" if valor >= 0 else "-"
-            return f" {signo} {formato_numero(abs(valor))}"
+        D = -2 * A * self.h
+        E = -2 * C * self.k
+        F = ((A * h_exp2) + (C * k_exp2))- (A * C)
+        
+        # Armar la ecuación
+        partes = []
+        if A != 0: partes.append(f"{A}x²")
+        if C != 0: partes.append(f"{'+' if C > 0 else '-'} {C}y²")
+        if D != 0: partes.append(f"{'+' if D > 0 else '-'} {abs(D)}x")
+        if E != 0: partes.append(f"{'+' if E > 0 else '-'} {abs(E)}y")
+        if F != 0: partes.append(f"{'+' if F > 0 else '-'} {abs(F)}")
 
-        return (
-            f"{formato_numero(A)}x² + {formato_numero(B)}y²"
-            f"{signo_valor(D)}x"
-            f"{signo_valor(E)}y"
-            f"{signo_valor(F)} = 0"
-        )
-
+        return " ".join(partes) + " = 0"
+    
 
     def calcular_puntos(self, n=100):
         puntos = []
