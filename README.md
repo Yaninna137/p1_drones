@@ -16,54 +16,69 @@ El proyecto está a cargo de estudiantes de Ingeniería Civil Informática, quie
 
 ## 👷 ¿Qué tiene ahora? (Avance)
 
-Actualmente se ha desarrollado la funcionalidad de cálculo de una elipse a partir de un RUT en `app/core/elipse.py`.
+Actualmente se ha desarrollado la funcionalidad de cálculo de múltiples elipses asociadas a RUTs, con lógica matemática implementada en `app/core/Match_ellipse.py`.
 
-Se implementa programación orientada a objetos (POO), separando la lógica de operaciones de la visualización.
+Se utiliza programación orientada a objetos (POO), separando la lógica matemática de la visualización e interfaz.
 
-En esta versión 1.0, la aplicación permite:
-- Ingresar un RUT y generar una elipse asociada.
-- Mostrar los elementos derivados de esa elipse.
-- Realizar todos los cálculos manualmente (sin utilizar librerías como `math`).  
-  → Ver más en [`docs/elipse.md`](docs/elipse.md)
-- Mostrar gráfica 2D con los puntos.
-- Mostrar gráfica 2D y3D de más elipse.
-- Detectar Colisiones entre elipse.
-- Mejorar visualización.
-- Ingresar más rut (máximo de soporte 5).
-- Rut aleatorio.
-- Separación, organización de archivos y nuevos archivos `test`, `core`.
+En esta versión 3.0, la aplicación permite:
+- Ingresar uno o más RUTs (máximo 5).
+- Generar elipses asociadas a cada RUT.
+- Mostrar los elementos derivados de cada elipse.
+- Calcular las coordenadas de manera manual (sin librerías externas como `math`).
+- Visualizar gráficamente las elipses en:
+  - Gráfica 2D individual.
+  - Gráfica 2D múltiple.
+  - Gráfica 2D/3D interactiva.
+- Detectar colisiones entre elipses.
+- Generar RUT aleatorio.
+- Mejoras visuales en las gráficas.
+- Separación y organización de componentes visuales en `app/core/components/`.
+- Estructura de carpetas modular para facilitar mantenimiento y escalabilidad.
+- Documentación inicial en `app/docs/`.
+- Carpeta `test/` para testear los módulos de `core/`.
 
+---
 
-> **Nota:** Hemos hecho una última actualización versión 2.0 : (Implementación de gráfica 3D, ingresar más rut, detección de colisión, mejora y más elementos de interfaz).
+### 📌 Notas
 
-> **Rut Aleatorio** Corregir un error el 40% entregara un rut invalido en aleatorio, hay que corregir.
+- **Actualización a versión 3.0**: Se integran mejoras en las gráficas 2D y 3D, organización del código y corrección de bugs generales.
+- **Corrección pendiente**: Detectar y resolver errores en la lógica de colisiones.
+- **Implementación futura**: Agregar simulación con cambio de coordenadas de forma manual.
+- **Punto de entrada**: La ejecución comienza desde `app.py`, que carga los componentes de visualización e interfaz, utilizando las funciones matemáticas del directorio `core/` y los elementos visuales del módulo `components/`.
 
-> **Panel** Se debe cambiar el panel de descripción.
+---
+
+### 🖼️ Nuevas imágenes
 
 <div align="center">
   <img src="assets/campo2.png" alt="Ingresar RUT" />
   <br/>
-  <i>Ingreso de RUT (De 1 a 5 max)</i>
+  <i>Ingreso de RUT (De 1 a 5 máx.)</i>
 </div>
+
 <div align="center">
-  <img src="assets/pest1.png" alt="Diseño del contenedor"/>
+  <img src="assets/pest1.png" alt="Pestañas disponibles" />
   <br/>
   <i>Pestañas disponibles</i>
 </div>
 
 <div align="center">
-  <img src="assets/pesta1.png" alt="Diseño del contenedor"/>
+  <img src="assets/pestana2v30.png" alt="Gráfica 2D/3D múltiple">
   <br/>
-  <i>Pestaña 1: Datos de elipses</i>
-</div>
-<div align="center">
-  <img src="assets/past21.png" alt="2D y 3D multiple elipses"/>
-  <img src="assets/past22.png" alt="colisiones"/>
-  <br/>
-  <i>Pestaña 2: Gráficos y colisiones</i>
+  <i>Pestaña 2: Gráficas múltiples 2D/3D con interacción (vs 3.0)</i>
+  
 </div>
 
-**Archivo correspondiente**La actual interfaz es perteneciente a la `beta5_interfaz.py` dentro del archivo `app/`. Esta interfaz aunque está algo desordenada en su sintaxis (cosa que se arreglara en prox. versiones)esta conectada con los archivos de `core/`donde se encuentran las lógicas de operar los datos .
+<div align="center">
+  <img src="assets/pestanav30.png" alt="Gráfica 2D individual">
+  <i>Pestaña 1: Gráfica 2D con ecuaciones corregidas (vs 3.0)</i>
+  <img src="assets/past22.png" alt="Colisiones" />
+  <br/>
+  
+</div>
+
+
+
 ## 🔧 Trabajo a implementar
 
 Se proyecta desarrollar una aplicación con estructura avanzada, que ofrezca una interfaz amigable y funcional para los usuarios, permitiendo validar los datos de forma clara y segura.
